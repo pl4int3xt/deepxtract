@@ -56,7 +56,7 @@ type Data struct {
 
 func main() {
 	if len(os.Args) < 3 {
-		fmt.Println("Usage: deeplinks <path_to_apk> <output_directory>")
+		fmt.Println("Usage: deepxtract <path_to_apk> <output_directory>")
 		return
 	}
 
