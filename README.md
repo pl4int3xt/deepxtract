@@ -7,7 +7,7 @@ including their intent actions and custom URL schemes.
 Ensure apktool is installed
 ```bash
 git clone https://github.com/pl4int3xt/deepxtract.git
-cd deeplinks-analyzer
+cd deepxtract
 ```
 Build the tool
 
