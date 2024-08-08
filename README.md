@@ -11,17 +11,17 @@ cd deepxtract
 ```
 Build the tool
 
-```
+```bash
 go build -o deepxtract main.go
 ```
 
 # Usage
-```
+```bash
 ./deepxtract <path_to_apk> <output_directory>
 ```
 Example
-```
-./deepxtract example.apk output
+```yaml
+./deepxtract ~/Documents/example.apk output
 
  ####     ######   ######   #####    ##  ##   ######   #####      ##      ####    ######  
  ## ##    ##       ##       ##  ##   ##  ##     ##     ##  ##    ####    ##  ##     ##    
@@ -32,22 +32,32 @@ Example
  ####     ######   ######   ##       ##  ##     ##     ##  ##   ##  ##    ####      ##                                   
 
 Decompiling APK...
-I: Using Apktool 2.9.3 on app-release-unsigned.apk
-I: Loading resource table...
-I: Decoding file-resources...
-I: Loading resource table from file: ~/.local/share/apktool/framework/1.apk
-I: Decoding values */* XMLs...
-I: Decoding AndroidManifest.xml with resources...
-I: Regular manifest package...
-I: Baksmaling classes.dex...
-I: Copying assets and libs...
-I: Copying unknown files...
-I: Copying original files...
-I: Copying META-INF/services directory
-Activity: com.example.MainActivity (exported=true)
-    Intent Action: android.intent.action.MAIN
-    Custom URL Scheme: myscheme://example
-Service: com.example.MyService (exported=false)
-    Intent Action: android.intent.action.SOME_ACTION
-    Custom URL Scheme: none
+
+Activities 
+
+    com.example.test.MainActivity(exported=true) 
+
+        Intent Action: android.intent.action.MAIN
+        Custom URL Scheme: none
+        MIME Type: none
+        Intent Action: android.intent.action.VIEW
+        Custom URL Scheme: myscheme://host
+        MIME Type: application/pdf
+
+Receivers 
+
+    androidx.profileinstaller.ProfileInstallReceiver(exported=true) 
+
+        Intent Action: androidx.profileinstaller.action.INSTALL_PROFILE
+        Custom URL Scheme: none
+        MIME Type: none
+        Intent Action: androidx.profileinstaller.action.SKIP_FILE
+        Custom URL Scheme: none
+        MIME Type: none
+        Intent Action: androidx.profileinstaller.action.SAVE_PROFILE
+        Custom URL Scheme: none
+        MIME Type: none
+        Intent Action: androidx.profileinstaller.action.BENCHMARK_OPERATION
+        Custom URL Scheme: none
+        MIME Type: none
 ```
