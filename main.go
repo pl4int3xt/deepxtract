@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -106,7 +105,7 @@ func readAndParseManifestFile(outputDir string){
 		return
 	}
 
-	manifestFile, err := ioutil.ReadFile(manifestPath)
+	manifestFile, err := os.ReadFile(manifestPath)
 	if err != nil {
 		fmt.Println("Error reading AndroidManifest.xml:", err)
 		return
