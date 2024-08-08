@@ -50,8 +50,9 @@ type Action struct {
 }
 
 type Data struct {
-	Scheme string `xml:"scheme,attr"`
-	Host   string `xml:"host,attr"`
+	Scheme   string `xml:"scheme,attr"`
+	Host     string `xml:"host,attr"`
+	MimeType string `xml:"mimeType,attr"`
 }
 
 func main() {
@@ -122,29 +123,36 @@ func readAndParseManifestFile(outputDir string){
 
 func parseAndPrintManifest(manifest Manifest) {
 	printComponent := func(componentType, name, exported string, filters []IntentFilter) {
-		fmt.Println(color.CyanString("%s: %s (exported=%s)", componentType, name, exported))
+		fmt.Println(color.CyanString("\n%s\n    %s(exported=%s) \n", componentType, name, exported))
 		if len(filters) == 0 {
-			fmt.Println(color.YellowString("    Intent Action: none"))
-			fmt.Println(color.MagentaString("    Custom URL Scheme: none"))
+			fmt.Println(color.YellowString("        Intent Action: none"))
+			fmt.Println(color.MagentaString("        Custom URL Scheme: none"))
+			fmt.Println(color.RedString("        MIME Type: none"))
 		} else {
 			for _, filter := range filters {
 				if len(filter.Actions) == 0 {
-					fmt.Println(color.YellowString("    Intent Action: none"))
+					fmt.Println(color.YellowString("        Intent Action: none"))
 				}
 				for _, action := range filter.Actions {
-					fmt.Println(color.YellowString("    Intent Action: %s", action.Name))
+					fmt.Println(color.YellowString("        Intent Action: %s", action.Name))
 				}
 
 				if len(filter.Data) == 0 {
-					fmt.Println(color.MagentaString("    Custom URL Scheme: none"))
+					fmt.Println(color.MagentaString("        Custom URL Scheme: none"))
+					fmt.Println(color.RedString("        MIME Type: none"))
 				} else {
 					for _, data := range filter.Data {
 						if data.Scheme == "" {
-							fmt.Println(color.MagentaString("    Custom URL Scheme: none"))
+							fmt.Println(color.MagentaString("        Custom URL Scheme: none"))
 						} else if data.Host == "" {
-							fmt.Println(color.MagentaString("    Custom URL Scheme: %s://", data.Scheme))
+							fmt.Println(color.MagentaString("        Custom URL Scheme: %s://", data.Scheme))
 						} else {
-							fmt.Println(color.MagentaString("    Custom URL Scheme: %s://%s", data.Scheme, data.Host))
+							fmt.Println(color.MagentaString("        Custom URL Scheme: %s://%s", data.Scheme, data.Host))
+						}
+						if data.MimeType == "" {
+							fmt.Println(color.RedString("        MIME Type: none"))
+						} else {
+							fmt.Println(color.RedString("        MIME Type: %s", data.MimeType))
 						}
 					}
 				}
@@ -153,14 +161,14 @@ func parseAndPrintManifest(manifest Manifest) {
 	}
 
 	for _, activity := range manifest.Applications[0].Activities {
-		printComponent("Activity", activity.Name, activity.Exported, activity.IntentFilters)
+		printComponent("Activities \n", activity.Name, activity.Exported, activity.IntentFilters)
 	}
 
 	for _, service := range manifest.Applications[0].Services {
-		printComponent("Service", service.Name, service.Exported, service.IntentFilters)
+		printComponent("Services \n", service.Name, service.Exported, service.IntentFilters)
 	}
 
 	for _, receiver := range manifest.Applications[0].Receivers {
-		printComponent("Receiver", receiver.Name, receiver.Exported, receiver.IntentFilters)
+		printComponent("Receivers \n", receiver.Name, receiver.Exported, receiver.IntentFilters)
 	}
 }
