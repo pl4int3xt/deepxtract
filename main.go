@@ -88,8 +88,8 @@ func banner(){
 func decompileApk(apkPath string, outputDir string){
 	fmt.Println(color.GreenString("Decompiling APK..."))
 	cmd := exec.Command("apktool", "d", apkPath, "-o", outputDir, "-f")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	// cmd.Stdout = os.Stdout
+	// cmd.Stderr = os.Stderr
 	err := cmd.Run()
 	if err != nil {
 		fmt.Println("Error decompiling APK:", err)
