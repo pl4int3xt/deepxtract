@@ -1,7 +1,7 @@
 # Deepextract
 Deepextract is a command-line tool for extracting and analyzing deep link configurations from Android APK files. 
 The tool decompiles the APK to access the `AndroidManifest.xml` file and extracts details about activities, services, and broadcast receivers, 
-including their intent actions and custom URL schemes.
+including their intent actions, custom URL schemes and mimeTypes.
 
 # Installation
 Ensure apktool is installed
