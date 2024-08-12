@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textStyle="bold" android:textColor="@android:color/black" android:gravity="center" android:layout_gravity="fill" android:id="@id/title_activity_08" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="50.0dip" android:text="@string/title_activity_challenge_08" android:layout_columnSpan="2" />
+    <EditText android:id="@id/challenge08_flag_entry" android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="none" />
+    <EditText android:id="@id/challenge_08_flagText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="textPassword" app:layout_constraintBottom_toTopOf="@id/challenge_08_loadUrlButton" />
+    <EditText android:id="@id/challenge_08_urlText" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="http://10.0.2.2:1337/evil.html" android:hint="URL" android:inputType="textPersonName" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.324" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/challenge_08_loadUrlButton" />
+    <Button android:id="@id/btn_challenge_08_load_url" android:layout_width="150.0dip" android:layout_height="wrap_content" android:text="@string/btn_challenge_08_load_url" />
+    <Button android:id="@id/btn_challenge_08_flag" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/btn_challenge_07_flag" android:backgroundTint="@android:color/holo_red_light" />
+    <WebView android:id="@id/challenge_08_urlWebView" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_constraintEnd_toEndOf="parent" />
+</LinearLayout>
