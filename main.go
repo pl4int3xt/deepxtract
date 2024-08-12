@@ -180,7 +180,6 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
-
 	"github.com/fatih/color"
 	"deepxtract/decompiler"
 	"deepxtract/manifest"
