@@ -23,73 +23,89 @@ func PrintManifest(manifest manifest.Manifest) {
 
     go func() {
         defer wg.Done()
-        printComponents("Activities", manifest.Applications[0].Activities)
+        printComponentGroup("Receivers", manifest.Applications[0].Receivers)
     }()
-
     go func() {
         defer wg.Done()
-        printComponents("Services", manifest.Applications[0].Services)
+        printComponentGroup("Activities", manifest.Applications[0].Activities)
     }()
-
     go func() {
         defer wg.Done()
-        printComponents("Receivers", manifest.Applications[0].Receivers)
+        printComponentGroup("Services", manifest.Applications[0].Services)
     }()
 
     wg.Wait()
 }
 
-func printComponents(componentType string, components interface{}) {
+func printComponentGroup(componentType string, components interface{}) {
+    fmt.Println(color.CyanString("\n[+] %s", componentType))
     switch c := components.(type) {
     case []manifest.Activity:
         for _, component := range c {
-            printComponent(componentType, component.Name, component.Exported, component.IntentFilters)
+            printComponent(component.Name, component.Exported, component.IntentFilters)
         }
     case []manifest.Service:
         for _, component := range c {
-            printComponent(componentType, component.Name, component.Exported, component.IntentFilters)
+            printComponent(component.Name, component.Exported, component.IntentFilters)
         }
     case []manifest.Receiver:
         for _, component := range c {
-            printComponent(componentType, component.Name, component.Exported, component.IntentFilters)
+            printComponent(component.Name, component.Exported, component.IntentFilters)
         }
     }
 }
 
-func printComponent(componentType, name, exported string, filters []manifest.IntentFilter) {
-    fmt.Println(color.CyanString("\n%s\n    %s(exported=%s) \n", componentType, name, exported))
+func printComponent(name, exported string, filters []manifest.IntentFilter) {
+    fmt.Printf(color.YellowString("    [>] %s(exported=%s)\n"), name, exported)
     if len(filters) == 0 {
-        fmt.Println(color.YellowString("        Intent Action: none"))
-        fmt.Println(color.MagentaString("        Custom URL Scheme: none"))
-        fmt.Println(color.RedString("        MIME Type: none"))
+        printEmptyFilters()
     } else {
         for _, filter := range filters {
-            if len(filter.Actions) == 0 {
-                fmt.Println(color.YellowString("        Intent Action: none"))
-            }
-            for _, action := range filter.Actions {
-                fmt.Println(color.YellowString("        Intent Action: %s", action.Name))
-            }
-
-            if len(filter.Data) == 0 {
-                fmt.Println(color.MagentaString("        Custom URL Scheme: none"))
-                fmt.Println(color.RedString("        MIME Type: none"))
-            } else {
-                for _, data := range filter.Data {
-                    if data.Scheme == "" {
-                        fmt.Println(color.MagentaString("        Custom URL Scheme: none"))
-                    } else if data.Host == "" {
-                        fmt.Println(color.MagentaString("        Custom URL Scheme: %s://", data.Scheme))
-                    } else {
-                        fmt.Println(color.MagentaString("        Custom URL Scheme: %s://%s", data.Scheme, data.Host))
-                    }
-                    if data.MimeType == "" {
-                        fmt.Println(color.RedString("        MIME Type: none"))
-                    } else {
-                        fmt.Println(color.RedString("        MIME Type: %s", data.MimeType))
-                    }
-                }
-            }
+            printFilter(filter)
         }
+    }
+}
+
+func printEmptyFilters() {
+    fmt.Println(color.MagentaString("        [-] Intent Action: none"))
+    fmt.Println(color.BlueString("        [-] Custom URL Scheme: none"))
+    fmt.Println(color.RedString("        [-] MIME Type: none"))
+}
+
+func printFilter(filter manifest.IntentFilter) {
+    if len(filter.Actions) == 0 {
+        fmt.Println(color.MagentaString("        [-] Intent Action: none"))
+    } else {
+        for _, action := range filter.Actions {
+            fmt.Printf(color.MagentaString("        [+] Intent Action: %s\n"), action.Name)
+        }
+    }
+
+    if len(filter.Data) == 0 {
+        fmt.Println(color.BlueString("        [-] Custom URL Scheme: none"))
+        fmt.Println(color.RedString("        [-] MIME Type: none"))
+    } else {
+        for _, data := range filter.Data {
+            printURLScheme(data)
+            printMIMEType(data)
+        }
+    }
+}
+
+func printURLScheme(data manifest.Data) {
+    if data.Scheme == "" {
+        fmt.Println(color.BlueString("        [-] Custom URL Scheme: none"))
+    } else if data.Host == "" {
+        fmt.Printf(color.BlueString("        [+] Custom URL Scheme: %s://\n"), data.Scheme)
+    } else {
+        fmt.Printf(color.BlueString("        [+] Custom URL Scheme: %s://%s\n"), data.Scheme, data.Host)
+    }
+}
+
+func printMIMEType(data manifest.Data) {
+    if data.MimeType == "" {
+        fmt.Println(color.RedString("        [-] MIME Type: none"))
+    } else {
+        fmt.Printf(color.RedString("        [+] MIME Type: %s\n"), data.MimeType)
     }
 }
