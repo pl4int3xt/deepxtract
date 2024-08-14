@@ -21,45 +21,36 @@ go build -o deepxtract main.go
 ```
 Example
 ```yaml
-./deepxtract ~/Documents/example.apk output
-
+./deepxtract ~/Documents/aah.apk output
  ____  _____ _____ ____ ___  _ _____  ____  ____  ____  _____ 
 /  _ \/  __//  __//  __\\  \///__ __\/  __\/  _ \/   _\/__ __\
 | | \||  \  |  \  |  \/| \  /   / \  |  \/|| / \||  /    / \  
 | |_/||  /_ |  /_ |  __/ /  \   | |  |    /| |-|||  \_   | |  
-\____/\____\\____\\_/   /__/\\  \_/  \_/\_\\_/ \|\____/  \_/  
-                                                                              
+\____/\____\\____\\_/   /__/\\  \_/  \_/\_\\_/ \|\____/  \_/                                                                       
     
 Decompiling apk file ....... 
 
-Activities 
+[+] Services
 
-    com.example.test.MainActivity(exported=true) 
+[+] Receivers
+    [>] aah.challenges.Receivers.Challenge03Receiver(exported=true)
+        [+] Intent Action: android.provider.Telephony.SECRET_CODE
+        [+] Custom URL Scheme: android_secret_code://600613
+        [-] MIME Type: none
+    [>] aah.challenges.Receivers.Challenge05Receiver(exported=true)
+        [+] Intent Action: aah.intent.LOAD_LIB
+        [-] Custom URL Scheme: none
+        [-] MIME Type: none
 
-        Intent Action: android.intent.action.MAIN
-        Custom URL Scheme: none
-        MIME Type: none
-        Intent Action: android.intent.action.VIEW
-        Custom URL Scheme: myscheme://host
-        MIME Type: application/pdf
-
-Receivers 
-
-    androidx.profileinstaller.ProfileInstallReceiver(exported=true) 
-
-        Intent Action: androidx.profileinstaller.action.INSTALL_PROFILE
-        Custom URL Scheme: none
-        MIME Type: none
-        Intent Action: androidx.profileinstaller.action.SKIP_FILE
-        Custom URL Scheme: none
-        MIME Type: none
-        Intent Action: androidx.profileinstaller.action.SAVE_PROFILE
-        Custom URL Scheme: none
-        MIME Type: none
-        Intent Action: androidx.profileinstaller.action.BENCHMARK_OPERATION
-        Custom URL Scheme: none
-        MIME Type: none
-
+[+] Activities
+    [>] aah.challenges.Challenge09Activity(exported=false)
+        [-] Intent Action: none
+        [-] Custom URL Scheme: none
+        [-] MIME Type: none
+    [>] aah.challenges.Challenge08Activity(exported=false)
+        [-] Intent Action: none
+        [-] Custom URL Scheme: none
+        [-] MIME Type: none
 
 
 ```
