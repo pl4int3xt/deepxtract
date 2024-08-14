@@ -50,8 +50,6 @@ type Application struct {
     Receivers  []Receiver `xml:"receiver"`
 }
 
-// Include other struct definitions (Activity, Service, Receiver, IntentFilter, etc.) here
-
 func ParseManifest(path string) (Manifest, error) {
     file, err := os.Open(path)
     if err != nil {
