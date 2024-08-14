@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView android:textStyle="bold" android:textColor="@android:color/black" android:gravity="center" android:layout_gravity="fill" android:id="@id/title_activity_05" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="50.0dip" android:text="@string/title_activity_challenge_05" android:layout_columnSpan="2" />
-    <TextView android:id="@id/challenge05_flag_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/text_challenge_05" />
-    <EditText android:id="@id/challenge05_flag_entry" android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="none" />
-    <Button android:id="@id/btn_challenge_05_flag" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/btn_challenge_05_flag" android:backgroundTint="@android:color/holo_red_light" />
-</LinearLayout>
